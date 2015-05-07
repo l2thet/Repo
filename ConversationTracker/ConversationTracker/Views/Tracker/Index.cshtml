@@ -1,0 +1,151 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/angular.min.js"></script>
+    <script>
+        (function () {
+            var app = angular.module("TrackedConversations", []);
+
+            app.controller('ConversationsCtrl', ['$http','$log','$scope', function ($http,$log,$scope) {
+                var self = this;
+                self.items = [];
+                $http.get('/tracker/retrieveTrackedConversations').
+                    success(function (data) {
+                        self.items = data;
+                    }).
+                    error(function (data) {
+                        $log.log(data);
+                    });
+
+                $scope.$on('child', function (event, data) {
+                    self.items.push(data);
+                });
+
+                self.removeItem = function (item) {
+                    $http.post('/tracker/deleteTrackedConversation', JSON.stringify(item)).
+                        success(function (data) {
+                            self.items = data;
+                        }).
+                        error(function (data) {
+                            $log.log(data);
+                        });
+
+                };
+
+            }]);
+
+            app.controller('NewConversationCtrl', ['$http', '$log','$scope', function ($http, $log, $scope) {
+                var self = this;
+                self.dateTime = new Date();
+                self.setting = "";
+                self.who = "";
+                self.rateOfUnease = 0;
+                self.notes = "";
+
+                self.addConvo = function () {
+                    var submissiondata = {};
+                    submissiondata.Date = new Date();
+                    submissiondata.SettingOrEnvironment = self.setting;
+                    submissiondata.Who = self.who;
+                    submissiondata.RateOfUnease = self.rateOfUnease;
+                    submissiondata.NotesOfChangeOverTime = self.notes;
+
+                    $http.post('/tracker/saveTrackedConversation', JSON.stringify(submissiondata)).
+                        success(function (data) {
+                            $scope.$emit('child', data);
+                            self.dateTime = new Date();
+                            self.setting = "";
+                            self.who = "";
+                            self.rateOfUnease = 0;
+                            self.notes = "";
+                        }).
+                        error(function (data) {
+                            $log.log(data);
+                        });
+                };
+            }]);
+
+            app.directive('customNumberValidation', function () {
+                return {
+                    require: 'ngModel',
+                    link: function (scope, element, attrs, modelCtrl) {
+
+                        modelCtrl.$parsers.push(function (inputValue) {
+                            var transformedInput = inputValue.toLowerCase().replace(/[a-z]/g, '');
+
+                            if (transformedInput != inputValue) {
+
+                                modelCtrl.$setViewValue(transformedInput);
+                                modelCtrl.$render();
+                            }
+
+                            return transformedInput;
+                        });
+                    }
+                };
+            });
+
+        })();
+    </script>
+    <title>Index</title>
+</head>
+<body class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Conversation Tracker
+        </div>
+        <div class="panel-content">
+            <div ng-app="TrackedConversations" ng-controller="ConversationsCtrl as convos">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Setting(Environment)</th>
+                            <th>Who</th>
+                            <th>Rate Of Unease</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="item in convos.items">
+                        <tr>
+                            <td>{{item.Date.substr(6,13) | date: 'medium'}}</td>
+                            <td>{{item.SettingOrEnvironment}}</td>
+                            <td>{{item.Who}}</td>
+                            <td>{{item.RateOfUnease}}</td>
+                            <td>{{item.NotesOfChangeOverTime}}</td>
+                            <td><span ng-click="convos.removeItem(item)"class="btn btn-default">X</span></td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-controller="NewConversationCtrl as convo">
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" readonly="readonly" value="{{convo.dateTime | date: 'yyyy-MM-dd'}}" />
+                            </td>
+                            <td>
+                                <input class="form-control" type="text" ng-model="convo.setting" />
+                            </td>
+                            <td>
+                                <input class="form-control" type="text" ng-model="convo.who" />
+                            </td>
+                            <td>
+                                <input class="form-control" custom-number-validation ng-model="convo.rateOfUnease" />
+                            </td>
+                            <td>
+                                <textarea class="form-control" rows="4" ng-model="convo.notes"></textarea>
+                            </td>
+                            <td><span ng-click="convo.addConvo()" class="btn btn-default">Add</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -41,15 +41,22 @@ namespace ConversationTracker.Controllers
         [HttpPost]
         public JsonResult saveTrackedConversation(ConversationTrackerObject convo)
         {
-            var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
-            var url = new MongoUrl(connectionstring);
-            var client = new MongoClient(url);
-            var db = client.GetDatabase(url.DatabaseName);
-            var collection = db.GetCollection<ConversationTrackerObject>("conversations");
+            try
+            {
+                var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
+                var url = new MongoUrl(connectionstring);
+                var client = new MongoClient(url);
+                var db = client.GetDatabase(url.DatabaseName);
+                var collection = db.GetCollection<ConversationTrackerObject>("conversations");
 
-            collection.InsertOneAsync(convo).Wait();
-            
-            return Json(convo);
+                collection.InsertOneAsync(convo).Wait();
+
+                return Json(convo);
+            }
+            catch(Exception ex)
+            {
+                return Json(ex);
+            }
         }
 
         [HttpPost]

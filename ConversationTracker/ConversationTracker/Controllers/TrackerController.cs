@@ -26,7 +26,7 @@ namespace ConversationTracker.Controllers
 
             using (IDocumentStore store = new DocumentStore
             {
-                Url = "http://localhost:8080/"
+                Url = "mongodb://appharbor_62031bdd-72a5-4bf1-9b12-4977e6e6b49b:e91nm4msb5f4k87kblf7ha42pi@ds031972.mongolab.com:31972/appharbor_62031bdd-72a5-4bf1-9b12-4977e6e6b49b"
             })
             {
                 store.Initialize();
@@ -44,7 +44,7 @@ namespace ConversationTracker.Controllers
         {
             using (IDocumentStore store = new DocumentStore
             {
-                Url = "http://localhost:8080"
+                Url = "mongodb://appharbor_62031bdd-72a5-4bf1-9b12-4977e6e6b49b:e91nm4msb5f4k87kblf7ha42pi@ds031972.mongolab.com:31972/appharbor_62031bdd-72a5-4bf1-9b12-4977e6e6b49b"
             })
             {
                 store.Initialize();
@@ -63,7 +63,7 @@ namespace ConversationTracker.Controllers
             List<ConversationTrackerObject> fromDb;
             using (IDocumentStore store = new DocumentStore
             {
-                Url = "http://localhost:8080"
+                Url = "mongodb://appharbor_62031bdd-72a5-4bf1-9b12-4977e6e6b49b:e91nm4msb5f4k87kblf7ha42pi@ds031972.mongolab.com:31972/appharbor_62031bdd-72a5-4bf1-9b12-4977e6e6b49b"
             })
             {
                 store.Initialize();

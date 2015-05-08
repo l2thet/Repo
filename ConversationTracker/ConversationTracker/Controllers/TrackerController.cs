@@ -48,7 +48,7 @@ namespace ConversationTracker.Controllers
                 var client = new MongoClient(url);
                 var db = client.GetDatabase(url.DatabaseName);
                 var collection = db.GetCollection<ConversationTrackerObject>("conversations");
-                //collection.InsertOneAsync(convo).Wait();
+                collection.InsertOneAsync(convo).Wait();
 
                 return Json(convo);
             }

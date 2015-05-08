@@ -43,12 +43,11 @@ namespace ConversationTracker.Controllers
         {
             try
             {
-                //var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
-                //var url = new MongoUrl(connectionstring);
-                //var client = new MongoClient(url);
-                //var db = client.GetDatabase(url.DatabaseName);
-                //var collection = db.GetCollection<ConversationTrackerObject>("conversations");
-
+                var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
+                var url = new MongoUrl(connectionstring);
+                var client = new MongoClient(url);
+                var db = client.GetDatabase(url.DatabaseName);
+                var collection = db.GetCollection<ConversationTrackerObject>("conversations");
                 //collection.InsertOneAsync(convo).Wait();
 
                 return Json(convo);

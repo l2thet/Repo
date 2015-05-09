@@ -14,6 +14,7 @@ namespace ConversationTracker.Controllers
 {
     public class TrackerController : Controller
     {
+        
         //
         // GET: /Tracker/
 
@@ -24,16 +25,17 @@ namespace ConversationTracker.Controllers
 
         public JsonResult retrieveTrackedConversations()
         {
-            List<ConversationTrackerObject> fromDb;
+            AppHarborDBDataContext db = new AppHarborDBDataContext(ConfigurationManager.AppSettings.Get("SQLSERVER_CONNECTION_STRING"));
+            List<prc_RetrieveConversationsResult> fromDb = db.prc_RetrieveConversations().ToList();
 
-            var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
-            var url = new MongoUrl(connectionstring);
-            var client = new MongoClient(url);
-            var db = client.GetDatabase(url.DatabaseName);
-            var collection = db.GetCollection<ConversationTrackerObject>("conversations");
-            Task<List<ConversationTrackerObject>> waiting = collection.Find(x => x.RateOfUnease >= 0).ToListAsync();
-            waiting.Wait();
-            fromDb = waiting.Result;
+            //var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
+            //var url = new MongoUrl(connectionstring);
+            //var client = new MongoClient(url);
+            //var db = client.GetDatabase(url.DatabaseName);
+            //var collection = db.GetCollection<ConversationTrackerObject>("conversations");
+            //Task<List<ConversationTrackerObject>> waiting = collection.Find(x => x.RateOfUnease >= 0).ToListAsync();
+            //waiting.Wait();
+            //fromDb = waiting.Result;
 
             return Json(fromDb, JsonRequestBehavior.AllowGet);
         }

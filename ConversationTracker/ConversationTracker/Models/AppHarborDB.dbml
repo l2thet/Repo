@@ -4,16 +4,6 @@
     <Parameter Name="Id" Parameter="id" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.prc_RetrieveConversations" Method="prc_RetrieveConversations">
-    <ElementType Name="prc_RetrieveConversationsResult">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ConversationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Environment" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="Who" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="RateOfUnease" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="Notes" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.prc_InsertConversation" Method="prc_InsertConversation">
     <Parameter Name="ConversationDate" Parameter="conversationDate" Type="System.DateTime" DbType="DateTime" />
     <Parameter Name="Environment" Parameter="environment" Type="System.String" DbType="NVarChar(100)" />
@@ -22,6 +12,16 @@
     <Parameter Name="Notes" Parameter="notes" Type="System.String" DbType="NVarChar(1000)" />
     <ElementType Name="prc_InsertConversationResult">
       <Column Name="Id" Type="System.Decimal" DbType="Decimal(38,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.prc_RetrieveConversations" Method="prc_RetrieveConversations">
+    <ElementType Name="prc_RetrieveConversationsResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SettingOrEnvironment" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Who" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RateOfUnease" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="NotesOfChangeOverTime" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

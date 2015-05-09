@@ -69,18 +69,44 @@ namespace ConversationTracker.Models
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_InsertConversation")]
+		public ISingleResult<prc_InsertConversationResult> prc_InsertConversation([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ConversationDate", DbType="DateTime")] System.Nullable<System.DateTime> conversationDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Environment", DbType="NVarChar(100)")] string environment, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Who", DbType="NVarChar(100)")] string who, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RateOfUnease", DbType="SmallInt")] System.Nullable<short> rateOfUnease, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Notes", DbType="NVarChar(1000)")] string notes)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), conversationDate, environment, who, rateOfUnease, notes);
+			return ((ISingleResult<prc_InsertConversationResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_RetrieveConversations")]
 		public ISingleResult<prc_RetrieveConversationsResult> prc_RetrieveConversations()
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<prc_RetrieveConversationsResult>)(result.ReturnValue));
 		}
+	}
+	
+	public partial class prc_InsertConversationResult
+	{
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_InsertConversation")]
-		public ISingleResult<prc_InsertConversationResult> prc_InsertConversation([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ConversationDate", DbType="DateTime")] System.Nullable<System.DateTime> conversationDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Environment", DbType="NVarChar(100)")] string environment, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Who", DbType="NVarChar(100)")] string who, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RateOfUnease", DbType="SmallInt")] System.Nullable<short> rateOfUnease, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Notes", DbType="NVarChar(1000)")] string notes)
+		private System.Nullable<decimal> _Id;
+		
+		public prc_InsertConversationResult()
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), conversationDate, environment, who, rateOfUnease, notes);
-			return ((ISingleResult<prc_InsertConversationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Decimal(38,0)")]
+		public System.Nullable<decimal> Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
 		}
 	}
 	
@@ -89,15 +115,15 @@ namespace ConversationTracker.Models
 		
 		private int _Id;
 		
-		private System.Nullable<System.DateTime> _ConversationDate;
+		private System.Nullable<System.DateTime> _Date;
 		
-		private string _Environment;
+		private string _SettingOrEnvironment;
 		
 		private string _Who;
 		
 		private System.Nullable<short> _RateOfUnease;
 		
-		private string _Notes;
+		private string _NotesOfChangeOverTime;
 		
 		public prc_RetrieveConversationsResult()
 		{
@@ -119,34 +145,34 @@ namespace ConversationTracker.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConversationDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ConversationDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Date
 		{
 			get
 			{
-				return this._ConversationDate;
+				return this._Date;
 			}
 			set
 			{
-				if ((this._ConversationDate != value))
+				if ((this._Date != value))
 				{
-					this._ConversationDate = value;
+					this._Date = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Environment", DbType="NVarChar(100)")]
-		public string Environment
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SettingOrEnvironment", DbType="NVarChar(100)")]
+		public string SettingOrEnvironment
 		{
 			get
 			{
-				return this._Environment;
+				return this._SettingOrEnvironment;
 			}
 			set
 			{
-				if ((this._Environment != value))
+				if ((this._SettingOrEnvironment != value))
 				{
-					this._Environment = value;
+					this._SettingOrEnvironment = value;
 				}
 			}
 		}
@@ -183,44 +209,18 @@ namespace ConversationTracker.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="NVarChar(1000)")]
-		public string Notes
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NotesOfChangeOverTime", DbType="NVarChar(1000)")]
+		public string NotesOfChangeOverTime
 		{
 			get
 			{
-				return this._Notes;
+				return this._NotesOfChangeOverTime;
 			}
 			set
 			{
-				if ((this._Notes != value))
+				if ((this._NotesOfChangeOverTime != value))
 				{
-					this._Notes = value;
-				}
-			}
-		}
-	}
-	
-	public partial class prc_InsertConversationResult
-	{
-		
-		private System.Nullable<decimal> _Id;
-		
-		public prc_InsertConversationResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Decimal(38,0)")]
-		public System.Nullable<decimal> Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this._Id = value;
+					this._NotesOfChangeOverTime = value;
 				}
 			}
 		}

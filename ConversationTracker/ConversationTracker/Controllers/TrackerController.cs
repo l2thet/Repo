@@ -28,15 +28,6 @@ namespace ConversationTracker.Controllers
             AppHarborDBDataContext db = new AppHarborDBDataContext(ConfigurationManager.AppSettings.Get("SQLSERVER_CONNECTION_STRING"));
             List<prc_RetrieveConversationsResult> fromDb = db.prc_RetrieveConversations().ToList();
 
-            //var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
-            //var url = new MongoUrl(connectionstring);
-            //var client = new MongoClient(url);
-            //var db = client.GetDatabase(url.DatabaseName);
-            //var collection = db.GetCollection<ConversationTrackerObject>("conversations");
-            //Task<List<ConversationTrackerObject>> waiting = collection.Find(x => x.RateOfUnease >= 0).ToListAsync();
-            //waiting.Wait();
-            //fromDb = waiting.Result;
-
             return Json(fromDb, JsonRequestBehavior.AllowGet);
         }
 
@@ -45,13 +36,9 @@ namespace ConversationTracker.Controllers
         {
             try
             {
-                var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
-                var url = new MongoUrl(connectionstring);
-                var client = new MongoClient(url);
-                var db = client.GetDatabase(url.DatabaseName);
-                var collection = db.GetCollection<ConversationTrackerObject>("conversations");
-                collection.InsertOneAsync(convo).Wait();
-
+                AppHarborDBDataContext db = new AppHarborDBDataContext(ConfigurationManager.AppSettings.Get("SQLSERVER_CONNECTION_STRING"));
+                prc_InsertConversationResult sqldata = db.prc_InsertConversation(convo.Date, convo.SettingOrEnvironment, convo.Who, short.Parse(convo.RateOfUnease.ToString()), convo.NotesOfChangeOverTime).FirstOrDefault();
+                convo.Id = sqldata.Id.ToString();
                 return Json(convo);
             }
             catch(Exception ex)
@@ -63,18 +50,9 @@ namespace ConversationTracker.Controllers
         [HttpPost]
         public JsonResult deleteTrackedConversation(ConversationTrackerObject convo)
         {
-            List<ConversationTrackerObject> fromDb;
-
-            var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
-            var url = new MongoUrl(connectionstring);
-            var client = new MongoClient(url);
-            var db = client.GetDatabase(url.DatabaseName);
-            var collection = db.GetCollection<ConversationTrackerObject>("conversations");
-            collection.DeleteOneAsync(x => x.Id == convo.Id).Wait();
-            Task<List<ConversationTrackerObject>> waiting = collection.Find(x => x.RateOfUnease >= 0).ToListAsync();
-            waiting.Wait();
-            fromDb = waiting.Result;
-
+            AppHarborDBDataContext db = new AppHarborDBDataContext(ConfigurationManager.AppSettings.Get("SQLSERVER_CONNECTION_STRING"));
+            db.prc_DeleteConversation(int.Parse(convo.Id));
+            List<prc_RetrieveConversationsResult> fromDb = db.prc_RetrieveConversations().ToList();
             return Json(fromDb);
         }
     }

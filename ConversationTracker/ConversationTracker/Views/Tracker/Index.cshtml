@@ -113,7 +113,7 @@
                             <th>Notes</th>
                         </tr>
                     </thead>
-                    <tbody ng-repeat="item in convos.items">
+                    <tbody ng-repeat="item in convos.items | orderBy: item.Date.substr(6,13)">
                         <tr>
                             <td>{{item.Date.substr(6,13) | date: 'medium'}}</td>
                             <td>{{item.SettingOrEnvironment}}</td>

@@ -8,7 +8,8 @@ namespace ConversationTracker.Models
 {
     public class ConversationLinqRepo: IConversationRepository
     {
-        AppHarborDBDataContext db = new AppHarborDBDataContext(ConfigurationManager.AppSettings.Get("SQLSERVER_CONNECTION_STRING"));
+        //AppHarborDBDataContext db = new AppHarborDBDataContext(ConfigurationManager.AppSettings.Get("SQLSERVER_CONNECTION_STRING"));
+        AppHarborDBDataContext db = new AppHarborDBDataContext(ConfigurationManager.ConnectionStrings["ConversationTrackerConnectionString"].ToString());
 
         public IList<ConversationTrackerObject> GetConversations()
         {
@@ -30,7 +31,7 @@ namespace ConversationTracker.Models
                 prc_InsertConversationResult sqlresult = db.prc_InsertConversation(cto.Date, cto.SettingOrEnvironment, cto.Who, short.Parse(cto.RateOfUnease.ToString()), cto.NotesOfChangeOverTime).FirstOrDefault();
                 return sqlresult.Id.ToString();
             }
-            catch(Exception ex)
+            catch
             {
                 throw;
             }
@@ -43,7 +44,7 @@ namespace ConversationTracker.Models
                 db.prc_DeleteConversation(Int32.Parse(cto.Id));
                 return true;
             }
-            catch(Exception ex)
+            catch
             {
                 return false;
             }

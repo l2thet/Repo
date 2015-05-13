@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db4dbef5644331495092c7a4930039d3da" Class="AppHarborDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=4dbef564-4331-4950-92c7-a4930039d3da.sqlserver.sequelizer.com;Initial Catalog=db4dbef5644331495092c7a4930039d3da;User ID=qfebkueovmkacrgz" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="db4dbef5644331495092c7a4930039d3daConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ConversationTracker" Class="AppHarborDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LT-PC\SQLEXPRESS;Initial Catalog=ConversationTracker;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ConversationTrackerConnectionString" Provider="System.Data.SqlClient" />
   <Function Name="dbo.prc_DeleteConversation" Method="prc_DeleteConversation">
     <Parameter Name="Id" Parameter="id" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />

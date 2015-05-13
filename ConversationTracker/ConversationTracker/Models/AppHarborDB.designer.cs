@@ -22,7 +22,7 @@ namespace ConversationTracker.Models
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="db4dbef5644331495092c7a4930039d3da")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ConversationTracker")]
 	public partial class AppHarborDBDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,7 +33,7 @@ namespace ConversationTracker.Models
     #endregion
 		
 		public AppHarborDBDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["db4dbef5644331495092c7a4930039d3daConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["ConversationTrackerConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

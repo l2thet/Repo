@@ -24,3 +24,9 @@ C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\Conversati
 C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\MongoDB.Driver.dll
 C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\MongoDB.Bson.xml
 C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\MongoDB.Driver.xml
+C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\Raven.Abstractions.dll
+C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\Raven.Client.Lightweight.dll
+C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\Raven.Abstractions.pdb
+C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\Raven.Abstractions.xml
+C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\Raven.Client.Lightweight.pdb
+C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\Raven.Client.Lightweight.xml

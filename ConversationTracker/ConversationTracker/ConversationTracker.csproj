@@ -49,6 +49,12 @@
     <Reference Include="MongoDB.Driver.Core">
       <HintPath>..\packages\MongoDB.Driver.Core.2.0.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\packages\RavenDB.Client.3.0.3660\lib\net45\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\packages\RavenDB.Client.3.0.3660\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
@@ -125,6 +131,7 @@
       <DependentUpon>AppHarborDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\ConversationLinqRepo.cs" />
+    <Compile Include="Models\ConversationRavenDBRepo.cs" />
     <Compile Include="Models\ConversationTrackerObject.cs" />
     <Compile Include="Models\IConversationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

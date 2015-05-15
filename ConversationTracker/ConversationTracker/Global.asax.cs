@@ -25,7 +25,7 @@ namespace ConversationTracker
             if (!Context.Request.Url.ToString().Contains("localhost"))
             {
                 if (!Context.Request.IsSecureConnection)
-                    Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
+                    Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:").Replace(":15645",""));
             }
         }
     }

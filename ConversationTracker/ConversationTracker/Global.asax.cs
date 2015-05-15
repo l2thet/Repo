@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -25,7 +26,10 @@ namespace ConversationTracker
             if (!Context.Request.Url.ToString().Contains("localhost"))
             {
                 if (!Context.Request.IsSecureConnection)
-                    Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:").Replace(":15645",""));
+                {
+                    string redirectstring = Regex.Replace(Context.Request.Url.ToString().Replace("http:", "https:"), ":.*", "", RegexOptions.IgnoreCase);
+                    Response.Redirect(redirectstring);
+                }
             }
         }
     }

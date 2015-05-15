@@ -83,5 +83,11 @@ namespace ConversationTracker.Models
                 throw;
             }
         }
+
+
+        public bool UserExists(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

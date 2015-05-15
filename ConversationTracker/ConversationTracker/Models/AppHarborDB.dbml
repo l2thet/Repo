@@ -24,4 +24,11 @@
       <Column Name="NotesOfChangeOverTime" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.prc_CheckForUser" Method="prc_CheckForUser">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="prc_CheckForUserResult">
+      <Column Name="[Exists]" Member="Exists" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

@@ -82,6 +82,13 @@ namespace ConversationTracker.Models
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<prc_RetrieveConversationsResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.prc_CheckForUser")]
+		public ISingleResult<prc_CheckForUserResult> prc_CheckForUser([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="NVarChar(100)")] string userName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="NVarChar(100)")] string password)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName, password);
+			return ((ISingleResult<prc_CheckForUserResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class prc_InsertConversationResult
@@ -221,6 +228,32 @@ namespace ConversationTracker.Models
 				if ((this._NotesOfChangeOverTime != value))
 				{
 					this._NotesOfChangeOverTime = value;
+				}
+			}
+		}
+	}
+	
+	public partial class prc_CheckForUserResult
+	{
+		
+		private System.Nullable<bool> _Exists;
+		
+		public prc_CheckForUserResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Exists]", Storage="_Exists", DbType="Bit")]
+		public System.Nullable<bool> Exists
+		{
+			get
+			{
+				return this._Exists;
+			}
+			set
+			{
+				if ((this._Exists != value))
+				{
+					this._Exists = value;
 				}
 			}
 		}

@@ -20,5 +20,13 @@ namespace ConversationTracker
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        protected void Application_BeginRequest() {
+            if (!Context.Request.Url.ToString().Contains("localhost"))
+            {
+                if (!Context.Request.IsSecureConnection)
+                    Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
+            }
+        }
     }
 }

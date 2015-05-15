@@ -8,7 +8,6 @@ namespace ConversationTracker.Models
 {
     public class ConversationLinqRepo: IConversationRepository
     {
-        //AppHarborDBDataContext db = new AppHarborDBDataContext(ConfigurationManager.AppSettings.Get("SQLSERVER_CONNECTION_STRING"));
         AppHarborDBDataContext db = new AppHarborDBDataContext(ConfigurationManager.ConnectionStrings["ConversationTrackerConnectionString"].ToString());
 
         public IList<ConversationTrackerObject> GetConversations()
@@ -43,6 +42,27 @@ namespace ConversationTracker.Models
             {
                 db.prc_DeleteConversation(Int32.Parse(cto.Id));
                 return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        public bool UserExists(string username, string password)
+        {
+            try
+            {
+                prc_CheckForUserResult dbresults = db.prc_CheckForUser(username, password).FirstOrDefault();
+                if(dbresults.Exists.Value)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch
             {

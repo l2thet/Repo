@@ -8,6 +8,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Configuration;
 using System.Threading.Tasks;
+using System.Web.Security;
 
 
 namespace ConversationTracker.Controllers
@@ -25,24 +26,58 @@ namespace ConversationTracker.Controllers
 
         //
         // GET: /Tracker/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string username, string password, string returnUrl = "/")
+        {
+            try
+            {
+                if (iRepository.UserExists(username, password))
+                {
+                    FormsAuthentication.SetAuthCookie(username, false);
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+        }
+
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
+
+        [Authorize]
         public JsonResult retrieveTrackedConversations()
         {
             try
             {
                 return Json(iRepository.GetConversations(), JsonRequestBehavior.AllowGet);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(ex);
             }
         }
 
+        [Authorize]
         [HttpPost]
         public JsonResult saveTrackedConversation(ConversationTrackerObject convo)
         {
@@ -57,6 +92,7 @@ namespace ConversationTracker.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public JsonResult deleteTrackedConversation(ConversationTrackerObject convo)
         {

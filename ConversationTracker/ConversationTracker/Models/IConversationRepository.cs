@@ -11,6 +11,7 @@ namespace ConversationTracker.Models
         IList<ConversationTrackerObject> GetConversations();
         string SaveConversation(ConversationTrackerObject cto);
         bool DeleteConversation(ConversationTrackerObject cto);
+        bool UserExists(string username, string password);
 
     }
 }

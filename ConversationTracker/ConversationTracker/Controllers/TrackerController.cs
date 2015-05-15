@@ -13,6 +13,7 @@ using System.Web.Security;
 
 namespace ConversationTracker.Controllers
 {
+    [RequireHttps]
     public class TrackerController : Controller
     {
         private readonly IConversationRepository iRepository;

@@ -22,16 +22,16 @@ namespace ConversationTracker
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
 
-        protected void Application_BeginRequest() {
-            if (!Context.Request.Url.ToString().Contains("localhost"))
-            {
-                if (Context.Request.Url.ToString().Contains("http:"))
-                {
-                    string redirectstring = Context.Request.Url.ToString().Replace("http:", "https:");
-                    redirectstring = Regex.Replace(redirectstring, ":.*", "", RegexOptions.IgnoreCase);
-                    Response.Redirect(redirectstring);
-                }
-            }
-        }
+        //protected void Application_BeginRequest() {
+        //    if (!Context.Request.Url.ToString().Contains("localhost"))
+        //    {
+        //        if (Context.Request.Url.ToString().Contains("http:"))
+        //        {
+        //            string redirectstring = Context.Request.Url.ToString().Replace("http:", "https:");
+        //            redirectstring = Regex.Replace(redirectstring, ":.*", "", RegexOptions.IgnoreCase);
+        //            Response.Redirect(redirectstring);
+        //        }
+        //    }
+        //}
     }
 }

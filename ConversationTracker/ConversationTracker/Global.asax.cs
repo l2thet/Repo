@@ -25,9 +25,10 @@ namespace ConversationTracker
         protected void Application_BeginRequest() {
             if (!Context.Request.Url.ToString().Contains("localhost"))
             {
-                if (!Context.Request.IsSecureConnection)
+                if (Context.Request.Url.ToString().Contains("http:"))
                 {
-                    string redirectstring = Regex.Replace(Context.Request.Url.ToString().Replace("http:", "https:"), ":.*", "", RegexOptions.IgnoreCase);
+                    string redirectstring = Context.Request.Url.ToString().Replace("http:", "https:");
+                    redirectstring = Regex.Replace(redirectstring, ":.*", "", RegexOptions.IgnoreCase);
                     Response.Redirect(redirectstring);
                 }
             }

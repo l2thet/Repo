@@ -30,8 +30,20 @@ namespace ConversationTracker.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            if(HttpContext.User.Identity.Name == "nmarhal" || HttpContext.User.Identity.Name == "dsimon")
+            {
+                RedirectToAction("ConversationTrackerReport");
+            }
             return View();
         }
+
+        [Authorize(Users="dsimon,nmarshal")]
+        public ActionResult ConversationTrackerReport()
+        {
+
+            return View(iRepository.GetConversations());
+        }
+
 
         public ActionResult Login()
         {

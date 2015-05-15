@@ -955,6 +955,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Tracker\Index.cshtml" />
     <Content Include="Views\Tracker\Login.cshtml" />
+    <Content Include="Views\Tracker\ConversationTrackerReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

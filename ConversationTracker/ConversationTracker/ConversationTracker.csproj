@@ -142,6 +142,7 @@
     <Compile Include="Models\ConversationTrackerObject.cs" />
     <Compile Include="Models\IConversationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequireHttpsAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

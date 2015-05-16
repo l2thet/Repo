@@ -12,11 +12,13 @@ namespace ConversationTracker.Models
     {
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string Id { get; set; }
-        [DisplayName("DateTime")]
         public DateTime Date { get; set; }
+        [DisplayName("Setting(Environment)")]
         public string SettingOrEnvironment { get; set; }
         public string Who { get; set; }
+        [DisplayName("Rate of Unease")]
         public int RateOfUnease { get; set; }
+        [DisplayName("Notes")]
         public string NotesOfChangeOverTime { get; set; }
     }
 }

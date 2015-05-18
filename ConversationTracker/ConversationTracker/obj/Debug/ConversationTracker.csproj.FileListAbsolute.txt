@@ -1,4 +1,3 @@
-C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\ConversationTracker.dll.config
 C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\ConversationTracker.dll
 C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\ConversationTracker.pdb
 C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\EntityFramework.dll
@@ -34,3 +33,4 @@ C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\Conversati
 C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\obj\Debug\ConversationTracker.dll
 C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\obj\Debug\ConversationTracker.pdb
 C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\obj\Debug\ConversationTracker.csprojResolveAssemblyReference.cache
+C:\Users\Lt\Documents\Visual Studio 2012\Projects\ConversationTracker\ConversationTracker\bin\ConversationTracker.dll.config

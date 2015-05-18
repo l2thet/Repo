@@ -30,7 +30,7 @@ namespace ConversationTracker.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            if(HttpContext.User.Identity.Name == "nmarhal" || HttpContext.User.Identity.Name == "dsimon")
+            if(HttpContext.User.Identity.Name == "nmarhal")
             {
                 RedirectToAction("ConversationTrackerReport");
             }

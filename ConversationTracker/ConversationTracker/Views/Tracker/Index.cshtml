@@ -9,91 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Scripts/angular.min.js"></script>
-    <script>
-        (function () {
-            var app = angular.module("TrackedConversations", []);
-
-            app.controller('ConversationsCtrl', ['$http','$log','$scope', function ($http,$log,$scope) {
-                var self = this;
-                self.items = [];
-                $http.get('/tracker/retrieveTrackedConversations').
-                    success(function (data) {
-                        self.items = data;
-                    }).
-                    error(function (data) {
-                        $log.log(data);
-                    });
-
-                $scope.$on('child', function (event, data) {
-                    self.items.push(data);
-                });
-
-                self.removeItem = function (item) {
-                    $http.post('/tracker/deleteTrackedConversation', JSON.stringify(item)).
-                        success(function (data) {
-                            self.items = data;
-                        }).
-                        error(function (data) {
-                            $log.log(data);
-                        });
-
-                };
-
-            }]);
-
-            app.controller('NewConversationCtrl', ['$http', '$log','$scope', function ($http, $log, $scope) {
-                var self = this;
-                self.dateTime = new Date();
-                self.setting = "";
-                self.who = "";
-                self.rateOfUnease = 0;
-                self.notes = "";
-
-                self.addConvo = function () {
-                    var submissiondata = {};
-                    submissiondata.Date = new Date();
-                    submissiondata.SettingOrEnvironment = self.setting;
-                    submissiondata.Who = self.who;
-                    submissiondata.RateOfUnease = self.rateOfUnease;
-                    submissiondata.NotesOfChangeOverTime = self.notes;
-
-                    $http.post('/tracker/saveTrackedConversation', JSON.stringify(submissiondata)).
-                        success(function (data) {
-                            $scope.$emit('child', data);
-                            self.dateTime = new Date();
-                            self.setting = "";
-                            self.who = "";
-                            self.rateOfUnease = 0;
-                            self.notes = "";
-                        }).
-                        error(function (data) {
-                            $log.log(data);
-                        });
-                };
-            }]);
-
-            app.directive('customNumberValidation', function () {
-                return {
-                    require: 'ngModel',
-                    link: function (scope, element, attrs, modelCtrl) {
-
-                        modelCtrl.$parsers.push(function (inputValue) {
-                            var transformedInput = inputValue.toLowerCase().replace(/[a-z]/g, '');
-
-                            if (transformedInput != inputValue) {
-
-                                modelCtrl.$setViewValue(transformedInput);
-                                modelCtrl.$render();
-                            }
-
-                            return transformedInput;
-                        });
-                    }
-                };
-            });
-
-        })();
-    </script>
+    <script src="~/Scripts/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script src="~/Scripts/ConversationTrackerIndex.js"></script>
     <title>Conversation Tracker</title>
 </head>
 <body class="container">
@@ -113,7 +30,7 @@
                             <th>Who</th>
                             <th>Rate Of Unease</th>
                             <th>Notes</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody ng-repeat="item in convos.items">
@@ -123,13 +40,14 @@
                             <td>{{item.Who}}</td>
                             <td>{{item.RateOfUnease}}</td>
                             <td>{{item.NotesOfChangeOverTime}}</td>
-                            <td><span ng-click="convos.removeItem(item)"class="btn btn-default">X</span></td>
+                            <td><span ng-click="convos.removeItem(item)" class="btn btn-default">X</span></td>
                         </tr>
                     </tbody>
                     <tbody ng-controller="NewConversationCtrl as convo">
                         <tr>
                             <td>
-                                <input type="text" class="form-control" readonly="readonly" value="{{convo.dateTime | date: 'yyyy-MM-dd'}}" />
+                                <input type="text" class="form-control" datepicker-popup="MMMM dd, yyyy" ng-model="convo.dateTime" is-open="convo.dateOpened" ng-click="convo.open()" />
+                                <timepicker ng-model="convo.mytime" hour-step="1" minute-step="1" show-meridian="true"></timepicker>
                             </td>
                             <td>
                                 <input class="form-control" type="text" ng-model="convo.setting" />

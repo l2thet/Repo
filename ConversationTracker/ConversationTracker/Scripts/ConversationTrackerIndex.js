@@ -45,7 +45,7 @@
 
         self.addConvo = function () {
             var submissiondata = {};
-            submissiondata.Date = new Date(self.dateTime.getUTCFullYear() + "-" + self.dateTime.getMonth() + "-" + self.dateTime.getDate() + " " + self.mytime.getHours() + ":" + self.mytime.getMinutes() + ":00");
+            submissiondata.Date = new Date(self.dateTime.getUTCFullYear() + "-" + (self.dateTime.getMonth() + 1) + "-" + self.dateTime.getDate() + " " + self.mytime.getHours() + ":" + self.mytime.getMinutes() + ":00");
             submissiondata.SettingOrEnvironment = self.setting;
             submissiondata.Who = self.who;
             submissiondata.RateOfUnease = self.rateOfUnease;
